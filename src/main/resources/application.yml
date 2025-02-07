@@ -1,0 +1,26 @@
+spring:
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+  datasource:
+    url: jdbc:mysql://${PUB_DB_HOST:127.0.0.1}:${PUB_DB_PORT:3306}/${PUB_DB_NAME:test}?createDatabaseIfNotExist=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${PUB_DB_USERNAME:root}
+    password: ${PUB_DB_PASSWORD:0000}
+    hikari:
+      maximum-pool-size: 3
+      maxLifeTime: 3300000
+      connection-timeout: 30000
+      idle-timeout: 600000
+      connection-test-query: SELECT 1
+      allow_update_outside_transaction: true
+chunkSize: 100
+mybatis:
+  type-aliases-package: com.turaco.request
+  mapper-locations: mappers/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: false
+    use-generated-keys: true
